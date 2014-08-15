@@ -34,12 +34,12 @@ describe Table do
 			end
 			it "first row is numbers 1 though 10" do
 				first_row = @table.split("\n")[0]
-				joined_header = first.scan(/\d+/).join("")
+				joined_header = first_row.scan(/\d+/).join("")
 				expect(joined_header).to eq(@x.join(""))
 			end
 			it "first column is numbers 1 though 10" do
 				rows = @table.split("\n")
-				first_column = rows.map{ |row| row.scan(/(\d+)\s+|/,1).strip }
+				first_column = rows.map{ |row| (row[/(\d+)\s+|/,1]||"").strip }
 				joined_column = first_column.join("")
 				expect(joined_column).to eq(@y.join(""))
 			end
@@ -61,16 +61,15 @@ describe Table do
 			end
 			it "first row is first 10 primes" do
 				first_row = @table.split("\n")[0]
-				joined_header = first.scan(/\d+/).join("")
+				joined_header = first_row.scan(/\d+/).join("")
 				expect(joined_header).to eq(@x.join(""))
 			end
 			it "first column is first 10 primes" do
 				rows = @table.split("\n")
-				first_column = rows.map{ |row| row.scan(/(\d+)\s+|/,1).strip }
+				first_column = rows.map{ |row| (row[/(\d+)\s+|/,1]||"").strip }
 				joined_column = first_column.join("")
 				expect(joined_column).to eq(@y.join(""))
 			end
 		end
 	end
 end
-
