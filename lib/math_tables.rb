@@ -16,9 +16,6 @@ class Table
     @x = x
     @y = y
     out = ""
-    @x_max ||= @x.sort.last
-    @y_max ||= @y.sort.last
-    max_cell_width = (@x_max*@y_max).to_s.length.to_i
     #make the space in the top left corner (TLC)
     out << ' '*(max_cell_width+2)
     #create the header
@@ -31,9 +28,19 @@ class Table
     out << "\n"
     @y.each do |j|
         out << "%-#{max_cell_width}d| " % j
-        @x.each {|i| out << "%-#{max_cell_width}d  " % (i*j)}
+        @x.each {|i| out << "%-#{max_cell_width}d  " % math(i,j)}
         out << "\n"
     end
     out
+  end
+
+  def self.max_cell_width
+    @x_max ||= @x.sort.last
+    @y_max ||= @y.sort.last
+    max_cell_width ||= (@x_max*@y_max).to_s.length.to_i
+  end
+
+  def self.math(a,b)
+    (a*b)
   end
 end
